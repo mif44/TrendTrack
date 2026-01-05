@@ -1,4 +1,4 @@
-from application_architecture import application_displays
+from src.gui.application_architecture import application_displays
 
 
 if __name__ == "__main__":

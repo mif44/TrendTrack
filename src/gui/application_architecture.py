@@ -2,10 +2,10 @@ import tkinter as tk
 
 
 from tkinter import *
-from displaying_information import TEXT_INFO
-from crypto_calculator import show_crypto_calculator
-from crypto_data import show_btc_graph
-from ai_prediction import update_chart
+from src.gui.displaying_information import TEXT_INFO
+from src.logic.crypto_calculator import show_crypto_calculator
+from src.logic.crypto_data import show_btc_graph
+from src.ai.ai_prediction import update_chart
 
 
 def application_displays() -> None:
@@ -13,7 +13,7 @@ def application_displays() -> None:
     root = tk.Tk()
     root.title("CryptoPredictor")
     root.geometry("1000x550")
-    root.iconbitmap(default="bitcoin.ico")
+    root.iconbitmap(default="assets/bitcoin.ico")
 
 
     def closing_application() -> None:

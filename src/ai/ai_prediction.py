@@ -7,12 +7,17 @@ import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
-model = joblib.load('btc_model.pkl')
-features = joblib.load('features.pkl')
+model = joblib.load('models/btc_model.pkl')
+features = joblib.load('models/features.pkl')
 
 
 def get_live_forecast() -> tuple[pd.DataFrame, float, float]:
     data = yf.download("BTC-USD", period="60d", interval="1d")
+
+    if data is None or data.empty:
+        print("Ошибка: Данные не загружены!")
+        return None, None, None
+
     data["MA7"] = data["Close"].rolling(window=7).mean()
     data["MA30"] = data["Close"].rolling(window=30).mean()
     data["Diff"] = data["Close"].diff()
@@ -38,9 +43,16 @@ def get_live_forecast() -> tuple[pd.DataFrame, float, float]:
 
 
 def update_chart(root) -> None:
-    fig, ax = plt.subplots(figsize=(7, 3))
-    data, last_close, last_pred = get_live_forecast()
+    result = get_live_forecast()
+
+    if result is None or result[0] is None:
+        print("Критическая ошибка: Данные для прогноза не получены.")
+        return
+
+    data, last_close, last_pred = result
+
     predicted_price = last_close * (1 + last_pred)
+    fig, ax = plt.subplots(figsize=(7, 3))
     ax.clear()
     plot_data = data.tail(30)
     ax.plot(data.index[-30:], data["Close"].tail(30), label='Reality', color='royalblue', lw=2)

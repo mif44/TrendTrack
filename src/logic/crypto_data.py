@@ -5,7 +5,7 @@ import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from datetime import datetime
-from config import BINANCE_URL_SCHEDULE
+from src.utils.config import BINANCE_URL_SCHEDULE
 
 
 def fetch_btc_usdt(interval="1h", limit="200") -> tuple[list[datetime], list[float]]:

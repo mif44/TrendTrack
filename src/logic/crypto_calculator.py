@@ -3,7 +3,7 @@ import tkinter as tk
 
 from tkinter import *
 from tkinter import ttk
-from binance_api import getting_crypt_currency, prices_crypto
+from src.logic.binance_api import getting_crypt_currency, prices_crypto
 
 
 def show_crypto_calculator(root) -> None:

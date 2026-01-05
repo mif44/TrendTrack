@@ -1,7 +1,7 @@
 import requests
 
 
-from config import BINANCE_URL
+from src.utils.config import BINANCE_URL
 
 
 cryptos = ["BTC", "ETH", "DOGE", "BNB"]
